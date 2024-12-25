@@ -1,0 +1,11 @@
+flutter_native_splash:
+  image: assets/images/splash_logo.png
+  color: "#202020"
+  branding: assets/images/branding.png
+  branding_bottom_padding: 24
+  android_12:
+    image: assets/images/android12splash.png
+    color: "#202020"
+    branding: assets/images/branding.png
+    branding_bottom_padding: 24
+    
