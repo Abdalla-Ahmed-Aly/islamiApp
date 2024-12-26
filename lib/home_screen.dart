@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:islamiapp/nav_bar_selected_icon.dart';
+import 'package:islamiapp/nav_bar_unselected_icon.dart';
 import 'package:islamiapp/tabs/hadeth/hadeth_tab.dart';
 import 'package:islamiapp/tabs/quran/quran_tab.dart';
 import 'package:islamiapp/tabs/radio/radio_tab.dart';
@@ -22,11 +24,37 @@ class _HomeScreenState extends State<HomeScreen> {
     RadioTab(),
     TimeTab(),
   ];
-
+  List<String> backgroundImageNames = [
+    'quranbacground',
+    'hadeth_background',
+    'sebhabackground',
+    'radio_Background',
+    'hadeth_background',
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: tabs[currentIndex],
+      body: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage(
+                'assets/images/${backgroundImageNames[currentIndex]}.png',
+              ),
+              fit: BoxFit.fill),
+        ),
+        child: Column(
+          children: [
+            Image.asset(
+              'assets/images/header.png',
+              height: MediaQuery.sizeOf(context).height * 0.18,
+            ),
+            Expanded(
+              child: tabs[currentIndex],
+            ),
+          ],
+        ),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: (index) {
@@ -35,43 +63,28 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         items: [
           BottomNavigationBarItem(
-            icon: SvgPicture.asset('assets/icons/quran.svg'),
-            activeIcon: SvgPicture.asset(
-              'assets/icons/quran.svg',
-              colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
-            ),
+            icon: NavBarUnselectedIcon(imgaename: 'quran'),
+            activeIcon: NavBarSelectedIcon(imgaename: 'quran'),
             label: 'Quran',
           ),
           BottomNavigationBarItem(
-            icon: SvgPicture.asset('assets/icons/hadeth.svg'),
-            activeIcon: SvgPicture.asset(
-              'assets/icons/hadeth.svg',
-              colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
-            ),
+            icon: NavBarUnselectedIcon(imgaename: 'hadeth'),
+            activeIcon: NavBarSelectedIcon(imgaename: 'hadeth'),
             label: 'Hadeth',
           ),
           BottomNavigationBarItem(
-            icon: SvgPicture.asset('assets/icons/sepha.svg'),
-            activeIcon: SvgPicture.asset(
-              'assets/icons/sepha.svg',
-              colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
-            ),
+            icon: NavBarUnselectedIcon(imgaename: 'sepha'),
+            activeIcon: NavBarSelectedIcon(imgaename: 'sepha'),
             label: 'sepha',
           ),
           BottomNavigationBarItem(
-            icon: SvgPicture.asset('assets/icons/radio.svg'),
-            activeIcon: SvgPicture.asset(
-              'assets/icons/radio.svg',
-              colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
-            ),
+            icon: NavBarUnselectedIcon(imgaename: 'radio'),
+            activeIcon: NavBarSelectedIcon(imgaename: 'radio'),
             label: 'Radio',
           ),
           BottomNavigationBarItem(
-            icon: SvgPicture.asset('assets/icons/time.svg'),
-            activeIcon: SvgPicture.asset(
-              'assets/icons/time.svg',
-              colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
-            ),
+            icon: NavBarUnselectedIcon(imgaename: 'time'),
+            activeIcon: NavBarSelectedIcon(imgaename: 'time'),
             label: 'Time',
           ),
         ],
