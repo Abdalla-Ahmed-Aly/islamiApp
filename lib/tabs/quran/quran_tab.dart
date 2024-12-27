@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:islamiapp/app_theme.dart';
+import 'package:islamiapp/tabs/quran/most_recntely_secion.dart';
 import 'package:islamiapp/tabs/quran/sura.dart';
 import 'package:islamiapp/tabs/quran/sura_item.dart';
 import 'package:islamiapp/tabs/quran/sura_service.dart';
+import 'package:islamiapp/tabs/quran/suradetails.dart';
 
 class QuranTab extends StatefulWidget {
   @override
@@ -48,10 +50,9 @@ class _QuranTabState extends State<QuranTab> {
               SuraService.serchSuraName(query);
               setState(() {});
             },
-          
           ),
-          
         ),
+        MostRecntelySecion(),
         Padding(
           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           child: Text(
@@ -60,7 +61,6 @@ class _QuranTabState extends State<QuranTab> {
           ),
         ),
         Expanded(
-
           child: SuraService.searshResult.isEmpty
               ? Center(
                   child: Text(
@@ -68,21 +68,30 @@ class _QuranTabState extends State<QuranTab> {
                     style: textTheme.titleSmall,
                   ),
                 )
-              :
-          
-           ListView.separated(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            itemBuilder: (_, index) => SuraItem(
-              SuraService.searshResult[index],
-            ),
-            separatorBuilder: (_, __) => Divider(
-              color: AppTheme.white,
-              thickness: 1,
-              indent: screenwidth * 0.1,
-              endIndent: screenwidth * 0.1,
-            ),
-            itemCount: SuraService.searshResult.length,
-          ),
+              : ListView.separated(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  itemBuilder: (_, index) {
+                    Sura sura = SuraService.searshResult[index];
+                    return InkWell(
+                      onTap: () async {
+                        SuraService.addSuraMostRecently(sura);
+                        await Navigator.of(context).pushNamed(
+                          Suradetails.routeName,
+                          arguments: sura,
+                        );
+                        setState(() {});
+                      },
+                      child: SuraItem(sura),
+                    );
+                  },
+                  separatorBuilder: (_, __) => Divider(
+                    color: AppTheme.white,
+                    thickness: 1,
+                    indent: screenwidth * 0.1,
+                    endIndent: screenwidth * 0.1,
+                  ),
+                  itemCount: SuraService.searshResult.length,
+                ),
         )
       ],
     );

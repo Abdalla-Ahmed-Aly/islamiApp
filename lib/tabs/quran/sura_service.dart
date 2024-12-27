@@ -1,4 +1,5 @@
 import 'package:islamiapp/tabs/quran/sura.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SuraService {
   static List<String> arabicSuraname = [
@@ -353,6 +354,7 @@ class SuraService {
     114,
     (index) => getSuraFromIndex(index),
   );
+  static List<Sura> mostRecently = [];
   static Sura getSuraFromIndex(int index) => Sura(
         arabicLisname: arabicSuraname[index],
         englishLisname: englishSuraname[index],
@@ -367,6 +369,33 @@ class SuraService {
           englishSuraname[i].toLowerCase().contains(qurey.toLowerCase())) {
         searshResult.add(getSuraFromIndex(i));
       }
+    }
+  }
+
+  static Future<void> getMostRecently() async {
+    SharedPreferences sharedPref = await SharedPreferences.getInstance();
+    List<String>? mostRecentlyIndexes =
+        sharedPref.getStringList('mostRecentlyIndexes');
+    if (mostRecentlyIndexes == null) return;
+    mostRecently = mostRecentlyIndexes.map((indexString) {
+      int index = int.parse(indexString);
+      Sura sura = getSuraFromIndex(index);
+      return sura;
+    }).toList();
+  }
+
+  static Future<void> addSuraMostRecently(Sura sura) async {
+    bool isfound = mostRecently
+        .any((mostRecentlySura) => mostRecentlySura.num == sura.num);
+    if (!isfound) {
+      mostRecently.add(sura);
+      List<String> mostRecentlyIndexes =
+          mostRecently.map((sura) => (sura.num - 1).toString()).toList();
+      SharedPreferences sharedPref = await SharedPreferences.getInstance();
+      sharedPref.setStringList(
+        'mostRecentlyIndexes',
+        mostRecentlyIndexes,
+      );
     }
   }
 }
