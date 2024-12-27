@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter_native_splash: ^2.4.3
   flutter_svg: ^2.0.16
+  smooth_page_indicator: ^1.2.0+3
   shared_preferences: ^2.3.4
 
 dev_dependencies:

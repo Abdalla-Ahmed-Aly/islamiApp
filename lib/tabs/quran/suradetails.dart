@@ -5,7 +5,7 @@ import 'package:islamiapp/tabs/quran/sura.dart';
 import 'package:islamiapp/widgets/loading_indicator.dart';
 
 class Suradetails extends StatefulWidget {
-  static const routeName = '/Suradetails';
+  static const routeName = '/MyPageView';
 
   @override
   State<Suradetails> createState() => _SuradetailsState();
