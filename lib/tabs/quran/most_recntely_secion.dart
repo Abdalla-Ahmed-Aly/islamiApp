@@ -23,6 +23,7 @@ class MostRecntelySecion extends StatelessWidget {
               height: MediaQuery.sizeOf(context).height * 0.16,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
+              
                 itemBuilder: (_, index) =>
                     MostRecentlyItem(SuraService.mostRecently.reversed.toList()[index]),
                 itemCount: SuraService.mostRecently.length,

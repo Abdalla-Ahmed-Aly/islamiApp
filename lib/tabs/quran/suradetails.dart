@@ -6,6 +6,7 @@ import 'package:islamiapp/widgets/loading_indicator.dart';
 
 class Suradetails extends StatefulWidget {
   static const routeName = '/Suradetails';
+  Suradetails();
 
   @override
   State<Suradetails> createState() => _SuradetailsState();
@@ -59,6 +60,7 @@ class _SuradetailsState extends State<Suradetails> {
               ? LoadingIndicator()
               : Expanded(
                   child: ListView.separated(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
                     itemBuilder: (_, index) => Text(
                       ayat[index],
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -86,6 +88,7 @@ class _SuradetailsState extends State<Suradetails> {
     String suraFileContent =
         await rootBundle.loadString('assets/text/Suras/${sura.num}.txt');
     ayat = suraFileContent.split('\r\n');
+    ayat[0].length;
     setState(() {});
   }
 }
