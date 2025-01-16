@@ -48,6 +48,7 @@ class AppTheme {
       fontWeight: FontWeight.bold,
       color: white,
     ),
+    bodyMedium:TextStyle(fontWeight: FontWeight.w700,fontSize: 36,color: white)
   ),
  );
 }

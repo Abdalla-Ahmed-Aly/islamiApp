@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:islamiapp/app_theme.dart';
 import 'package:islamiapp/tabs/quran/sura.dart';
-import 'package:islamiapp/tabs/quran/sura_service.dart';
-import 'package:islamiapp/tabs/quran/suradetails.dart';
+
 
 class SuraItem extends StatefulWidget {
   SuraItem(this.sura);
